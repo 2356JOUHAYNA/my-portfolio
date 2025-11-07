@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jouhayna Koubichate – Portfolio</title>
+  <meta name="description" content="Portfolio de Jouhayna Koubichate – Développement logiciel & Data Science" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #ec4899;
+      --accent-light: #f472b6;
+      --gold: #fbbf24;
+      --text: #0f172a;
+      --text-soft: #334155;
+      --text-muted: #64748b;
+      --bg: #ffffff;
+      --bg-dark: #0f172a;
+      --surface: #f8fafc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    /* Animated Background */
+    .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
+    .bg-shape { position: absolute; border-radius: 50%; filter: blur(80px); animation: float 20s infinite ease-in-out; }
+    .shape-1 { width: 500px; height: 500px; background: linear-gradient(135deg, var(--primary), var(--accent)); top: -200px; left: -200px; animation-delay: 0s; }
+    .shape-2 { width: 400px; height: 400px; background: linear-gradient(135deg, var(--accent), var(--gold)); bottom: -150px; right: -150px; animation-delay: 5s; }
+    .shape-3 { width: 300px; height: 300px; background: linear-gradient(135deg, var(--primary), var(--gold)); top: 50%; right: 10%; animation-delay: 10s; }
+    @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(30px,-50px) scale(1.1);} 66%{transform:translate(-20px,30px) scale(0.9);} }
+
+    /* Header */
+    header { padding: 120px 0 80px; position: relative; }
+    .header-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .header-text h1 {
+      font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .header-text .tagline { font-size: 1.5rem; color: var(--text-soft); margin-bottom: 32px; font-weight: 300; }
+    .header-links { display: flex; gap: 24px; margin-bottom: 40px; }
+    .header-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
+    .header-links a:hover { color: var(--primary); }
+    .cta-primary {
+      display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff;
+      text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; box-shadow: 0 8px 30px rgba(99,102,241,.3);
+    }
+    .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(99,102,241,.4); }
+    .header-visual { position: relative; }
+
+    /* Photo Profile */
+    .profile-photo-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto 40px; }
+    .photo-frame { position: relative; width: 280px; height: 280px; margin: 0 auto; }
+    .photo-frame::before { content:''; position:absolute; inset:-8px; background:linear-gradient(135deg,var(--primary),var(--accent),var(--gold)); border-radius:50%; animation:rotate 8s linear infinite; z-index:-1; }
+    @keyframes rotate { 100% { transform: rotate(360deg); } }
+    .photo-placeholder { width:100%; height:100%; border-radius:50%; background:linear-gradient(135deg,#e0e7ff 0%,#fce7f3 100%); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; border:8px solid #fff; box-shadow:0 20px 60px rgba(0,0,0,.15); }
+    .profile-image { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+    .visual-card { background:#fff; border-radius:20px; padding:40px; box-shadow:0 20px 60px rgba(0,0,0,.1); position:relative; overflow:hidden; }
+    .visual-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--primary),var(--accent),var(--gold)); }
+
+    .stats { display:grid; grid-template-columns: repeat(2,1fr); gap:24px; }
+    .stat-item { text-align:center; }
+    .stat-number {
+      font-size: 2.5rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size:.875rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.1em; font-weight:600; }
+
+    /* Navigation */
+    nav { position: sticky; top: 0; background: rgba(255,255,255,.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,.1); z-index:100; padding:20px 0; }
+    nav .container { display:flex; justify-content:center; gap:40px; }
+    nav a { color:var(--text-soft); text-decoration:none; font-weight:600; font-size:.9375rem; transition: color .3s; position:relative; }
+    nav a::after { content:''; position:absolute; bottom:-8px; left:0; width:0; height:2px; background:var(--primary); transition: width .3s; }
+    nav a:hover { color:var(--primary); }
+    nav a:hover::after { width:100%; }
+
+    /* Sections */
+    section { padding: 100px 0; }
+    .section-header { text-align:center; margin-bottom:80px; }
+    .section-label { font-size:.875rem; font-weight:600; color:var(--primary); text-transform:uppercase; letter-spacing:.15em; margin-bottom:16px; }
+    .section-title { font-family:'Playfair Display', serif; font-size:3rem; font-weight:700; color:var(--text); margin-bottom:24px; }
+    .section-subtitle { font-size:1.125rem; color:var(--text-soft); max-width:600px; margin:0 auto; }
+
+    /* Projects */
+    .projects-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:40px; }
+    .project-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 40px rgba(0,0,0,.08); transition:all .4s cubic-bezier(.4,0,.2,1); position:relative; cursor:pointer; }
+    .project-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--primary),var(--accent)); opacity:0; transition: opacity .4s; }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,.15); }
+    .project-card:hover::before { opacity:.05; }
+    .project-image { height:200px; background:linear-gradient(135deg,var(--primary),var(--accent)); display:flex; align-items:center; justify-content:center; font-size:4rem; position:relative; overflow:hidden; }
+    .project-image::after { content:''; position:absolute; inset:0; background: linear-gradient(135deg,transparent,rgba(0,0,0,.2)); }
+    .project-content { padding:32px; }
+    .project-category { font-size:.8125rem; color:var(--primary); font-weight:600; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; }
+    .project-card h3 { font-size:1.5rem; font-weight:700; margin-bottom:12px; color:var(--text); }
+    .project-card p { color:var(--text-soft); margin-bottom:24px; line-height:1.7; }
+    .project-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag { padding:6px 16px; background:var(--surface); border-radius:20px; font-size:.8125rem; color:var(--text-muted); font-weight:500; }
+
+    /* Extra styles for bullets/pills/meta */
+    .project-bullets { margin:10px 0 0; padding-left:18px; color:#374151; }
+    .project-meta { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .pill { padding:4px 10px; border:1px solid #e5e7eb; border-radius:999px; font-size:12px; color:#374151; }
+
+    /* Skills */
+    #skills { background: var(--bg-dark); color: #fff; }
+    #skills .section-label { color: var(--accent-light); }
+    #skills .section-title, #skills .section-subtitle { color: #fff; }
+    .skills-container { display:grid; grid-template-columns: repeat(4,1fr); gap:40px; }
+    .skill-category { position:relative; }
+    .skill-icon { width:60px; height:60px; background:linear-gradient(135deg,var(--primary),var(--accent)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:20px; }
+    .skill-category h3 { font-size:1.125rem; font-weight:700; margin-bottom:16px; }
+    .skill-list { list-style:none; }
+    .skill-list li { padding:8px 0; color:rgba(255,255,255,.7); font-size:.9375rem; position:relative; padding-left:20px; }
+    .skill-list li::before { content:'→'; position:absolute; left:0; color:var(--accent-light); }
+
+    /* Contact */
+    .contact-container {
+      background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 24px; padding: 80px 60px; text-align: center; color: #fff;
+      box-shadow: 0 20px 60px rgba(99,102,241,.3);
+    }
+    .contact-container h2 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:24px; }
+    .contact-container p { font-size:1.25rem; margin-bottom:40px; opacity:.9; }
+    .contact-links { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; }
+    .contact-btn { padding:16px 32px; background:#fff; color:var(--primary); text-decoration:none; border-radius:50px; font-weight:600; transition:all .3s; display:inline-flex; align-items:center; gap:8px; }
+    .contact-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    .contact-btn.secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+
+    /* Footer */
+    footer { padding: 60px 0; text-align: center; border-top: 1px solid rgba(0,0,0,.1); }
+    .footer-text { color: var(--text-muted); font-size: .9375rem; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .header-content { grid-template-columns: 1fr; gap: 60px; }
+      .header-visual { order: -1; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-container { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      header { padding: 80px 0 60px; }
+      .header-text h1 { font-size: 2.5rem; }
+      .header-text .tagline { font-size: 1.125rem; }
+      .photo-frame { width: 220px; height: 220px; }
+      nav .container { flex-wrap: wrap; gap: 20px; }
+      .section-title { font-size: 2rem; }
+      section { padding: 60px 0; }
+      .skills-container { grid-template-columns: 1fr; }
+      .contact-container { padding: 60px 32px; }
+      .contact-links { flex-direction: column; }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp { from { opacity:0; transform: translateY(40px);} to { opacity:1; transform: translateY(0);} }
+    .fade-in { animation: fadeInUp .8s ease forwards; }
+  </style>
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <!-- Colonne gauche -->
+        <div class="header-text">
+          <h1>Jouhayna Koubichate</h1>
+          <p class="tagline">Développeuse Full-Stack & Data Scientist</p>
+          <div class="header-links">
+            <a href="mailto:jouahyankoubichate.pfe@gmail.com"><span>✉</span> Email</a>
+            <a href="https://www.linkedin.com/in/jouhayna-koubichate-9b13362a1" target="_blank" rel="noreferrer"><span>in</span> LinkedIn</a>
+            <a href="https://github.com" target="_blank" rel="noreferrer"><span>⌘</span> GitHub</a>
+          </div>
+          <a href="#contact" class="cta-primary">Parlons de votre projet</a>
+        </div>
+
+        <!-- Colonne droite -->
+        <div class="header-visual">
+          <div class="profile-photo-container">
+            <div class="photo-frame">
+              <div class="photo-placeholder" id="photoPlaceholder">
+                <img src="assets/ana.png" class="profile-image" alt="Jouhayna Koubichate">
+              </div>
+            </div>
+          </div>
+
+          <div class="visual-card">
+            <div class="stats">
+              <div class="stat-item">
+                <div class="stat-number" id="stat-projects" data-suffix="+">0</div>
+                <div class="stat-label">Projets</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" id="stat-techs" data-suffix="+">0</div>
+                <div class="stat-label">Technologies</div>
+              </div>
+              <div class="stat-item">
+                <!-- ajuste l’année de début d’études si besoin -->
+                <div class="stat-number" id="stat-years" data-start-year="2022" data-suffix="+">0</div>
+                <div class="stat-label">Ans d'études</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" id="stat-passion" data-suffix="%">100</div>
+                <div class="stat-label">Passion</div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /header-visual -->
+      </div><!-- /header-content -->
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="#work">Projets</a>
+      <a href="#skills">Expertise</a>
+      <a href="#resume">CV</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="work">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div class="section-label">Portfolio</div>
+          <h2 class="section-title">Projets Réalisés</h2>
+          <p class="section-subtitle">Une sélection de projets qui démontrent mes compétences en développement web et analyse de données</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Exemple Projet 1 -->
+          <div class="project-card fade-in">
+            <div class="project-image">🛍️</div>
+            <div class="project-content">
+              <div class="project-category">Développement Web</div>
+              <h3>Plateforme E-Commerce</h3>
+              <p>Solution complète de commerce en ligne avec architecture microservices, gestion des paiements sécurisés et interface utilisateur moderne.</p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Docker</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menara Prefa -->
+          <div class="project-card fade-in">
+            <div class="project-image">🦺</div>
+            <div class="project-content">
+              <div class="project-category">Développement Web & IA</div>
+              <h3>Plateforme EPI – Menara Prefa</h3>
+              <p>
+                Application de gestion des Équipements de Protection Individuelle (EPI) avec
+                dashboard dynamique, traçabilité (audit log) et génération de rapports PDF.
+                Intégration d’un microservice FastAPI (prévisions via Prophet) et d’un chatbot
+                pour l’analyse interactive des données.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Laravel</span>
+                <span class="tag">ReactJS</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Python</span>
+                <span class="tag">Prophet</span>
+              </div>
+              <div class="project-meta">
+                <span class="pill">Juil–Sept 2025</span>
+                <span class="pill">Menara Prefa</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cour d'Appel -->
+          <div class="project-card fade-in">
+            <div class="project-image">🏛️</div>
+            <div class="project-content">
+              <div class="project-category">Développement Web</div>
+              <h3>Parc Informatique – Cour d’appel</h3>
+              <p>Application web pour la gestion centralisée du parc informatique : suivi et inventaire du matériel, planification/suivi de la maintenance, gestion des incidents.</p>
+              <ul class="project-bullets">
+                <li>Gestion du matériel (inventaire, traçabilité)</li>
+                <li>Maintenance (planification, suivi des interventions)</li>
+                <li>Incidents (ticketing, statut, délais)</li>
+              </ul>
+              <div class="project-tags">
+                <span class="tag">Django</span>
+                <span class="tag">Python</span>
+                <span class="tag">SQL Server</span>
+                <span class="tag">UML</span>
+              </div>
+              <div class="project-meta">
+                <span class="pill">Juil 2024</span>
+                <span class="pill">Cour d’appel – Marrakech</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Donateurs -->
+          <div class="project-card fade-in">
+            <div class="project-image">💰</div>
+            <div class="project-content">
+              <div class="project-category">Application Desktop</div>
+              <h3>Gestion des Donateurs et Dons</h3>
+              <p>Application de bureau permettant l’ajout, le suivi et la gestion des donateurs et des dons, avec affichage des transactions et interface ergonomique en JavaFX.</p>
+              <div class="project-tags">
+                <span class="tag">Java</span>
+                <span class="tag">JavaFX</span>
+                <span class="tag">JPA</span>
+                <span class="tag">MVC</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SafeWomen -->
+          <div class="project-card fade-in">
+            <div class="project-image">🆘</div>
+            <div class="project-content">
+              <div class="project-category">Mobile & Web App</div>
+              <h3>SafeWomen – Sécurité des Femmes</h3>
+              <p>Application mobile et web dédiée à la sécurité des femmes, permettant l’envoi d’alertes SOS avec géolocalisation et enregistrement audio en temps réel. Architecture sécurisée avec backend Flask et base de données PostgreSQL.</p>
+              <div class="project-tags">
+                <span class="tag">Java</span>
+                <span class="tag">ReactJS</span>
+                <span class="tag">Flask</span>
+                <span class="tag">PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- UrgenceKit -->
+          <div class="project-card fade-in">
+            <div class="project-image">🚑</div>
+            <div class="project-content">
+              <div class="project-category">Intelligence Artificielle</div>
+              <h3>UrgenceKit – Application d’Assistance d’Urgence</h3>
+              <p>Développement d’une application intelligente d’assistance d’urgence intégrant la détection, la gestion des alertes et l’analyse automatique des situations critiques. Modélisation UML avec Power AMC et architecture IA sous Django/Python.</p>
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Django</span>
+                <span class="tag">HTML</span>
+                <span class="tag">Bootstrap</span>
+                <span class="tag">UML</span>
+                <span class="tag">Power AMC</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dar Toda -->
+          <div class="project-card fade-in">
+            <div class="project-image">🏠</div>
+            <div class="project-content">
+              <div class="project-category">Développement Web</div>
+              <h3>Site Web – Auberge “Dar Toda”</h3>
+              <p>Création d’un site vitrine professionnel pour l’auberge “Dar Toda”, mettant en valeur les services d’hébergement et facilitant les réservations en ligne. Interface responsive et base de données MySQL.</p>
+              <div class="project-tags">
+                <span class="tag">PHP</span>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Bootstrap</span>
+                <span class="tag">MySQL</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /projects-grid -->
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div class="section-label">Expertise</div>
+          <h2 class="section-title">Compétences Techniques</h2>
+          <p class="section-subtitle">Maîtrise des technologies modernes pour créer des solutions innovantes et performantes</p>
+        </div>
+        <div class="skills-container">
+          <div class="skill-category fade-in">
+            <div class="skill-icon">⚡</div>
+            <h3>Frontend</h3>
+            <ul class="skill-list">
+              <li>React & Redux</li><li>Angular</li><li>Vue.js</li><li>TypeScript</li><li>Tailwind CSS</li><li>Responsive Design</li>
+            </ul>
+          </div>
+          <div class="skill-category fade-in">
+            <div class="skill-icon">⚙️</div>
+            <h3>Backend</h3>
+            <ul class="skill-list">
+              <li>Java / Spring Boot</li><li>Node.js / Express</li><li>Python / Flask</li><li>REST API</li><li>Microservices</li><li>Authentication</li>
+            </ul>
+          </div>
+          <div class="skill-category fade-in">
+            <div class="skill-icon">🗄️</div>
+            <h3>Données</h3>
+            <ul class="skill-list">
+              <li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>Redis</li><li>Data Modeling</li><li>SQL Optimization</li>
+            </ul>
+          </div>
+          <div class="skill-category fade-in">
+            <div class="skill-icon">🤖</div>
+            <h3>Data Science</h3>
+            <ul class="skill-list">
+              <li>Python / Pandas</li><li>Machine Learning</li><li>TensorFlow</li><li>Scikit-learn</li><li>Data Visualization</li><li>Statistical Analysis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume">
+      <div class="container">
+        <div class="section-header fade-in">
+          <div class="section-label">Parcours</div>
+          <h2 class="section-title">Curriculum Vitae</h2>
+        </div>
+        <div style="text-align:center;">
+          <a href="assets/CV_Jouhayna_Koubichate.pdf" download class="cta-primary">Télécharger mon CV</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-container fade-in">
+          <h2>Travaillons Ensemble</h2>
+          <p>Vous avez un projet ambitieux ? Discutons de la façon dont je peux vous aider à transformer vos idées en solutions concrètes.</p>
+          <div class="contact-links">
+            <a href="mailto:jouahyankoubichate.pfe@gmail.com" class="contact-btn"><span>✉</span> Envoyer un email</a>
+            <a href="https://www.linkedin.com/in/jouhayna-koubichate-9b13362a1" target="_blank" rel="noreferrer" class="contact-btn secondary"><span>in</span> Me suivre sur LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="footer-text">© <span id="year"></span> Jouhayna Koubichate – Développé avec passion</p>
+    </div>
+  </footer>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Fade-in observer
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'all 0.8s ease';
+      observer.observe(el);
+    });
+
+    /* ===== Stats automatiques ===== */
+
+    // animation numérique
+    function animateCounter(el, target, suffix = '', duration = 800) {
+      const start = parseFloat((el.textContent || '0').replace(/[^\d.]/g,'')) || 0;
+      const t0 = performance.now();
+      function frame(t) {
+        const p = Math.min((t - t0) / duration, 1);
+        const val = Math.floor(start + (target - start) * p);
+        el.textContent = val + suffix;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // calcule à partir du DOM
+    function computeStats() {
+      // Projets = nb de cartes
+      const projects = document.querySelectorAll('.projects-grid .project-card').length;
+      // Technologies = tags uniques
+      const techSet = new Set(
+        [...document.querySelectorAll('.projects-grid .project-tags .tag')]
+          .map(t => t.textContent.trim().toLowerCase())
+          .filter(Boolean)
+      );
+      const technologies = techSet.size;
+      // Années d'études
+      const yEl = document.getElementById('stat-years');
+      const startYear = parseInt(yEl?.dataset.startYear || '2022', 10);
+      const nowYear = new Date().getFullYear();
+      const years = Math.max(1, nowYear - startYear + 1);
+      return { projects, technologies, years };
+    }
+
+    function updateStats(animate = true) {
+      const { projects, technologies, years } = computeStats();
+      const pEl = document.getElementById('stat-projects');
+      const tEl = document.getElementById('stat-techs');
+      const yEl = document.getElementById('stat-years');
+
+      const pSuf = pEl?.dataset.suffix || '';
+      const tSuf = tEl?.dataset.suffix || '';
+      const ySuf = yEl?.dataset.suffix || '';
+
+      if (animate) {
+        animateCounter(pEl, projects, pSuf);
+        animateCounter(tEl, technologies, tSuf);
+        animateCounter(yEl, years, ySuf);
+      } else {
+        if (pEl) pEl.textContent = projects + pSuf;
+        if (tEl) tEl.textContent = technologies + tSuf;
+        if (yEl) yEl.textContent = years + ySuf;
+      }
+    }
+
+    // init
+    document.addEventListener('DOMContentLoaded', () => {
+      updateStats(false);
+      setTimeout(() => updateStats(true), 150);
+    });
+
+    // observe les changements dans la grille projets
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (projectsGrid && 'MutationObserver' in window) {
+      const obs = new MutationObserver(() => updateStats(true));
+      obs.observe(projectsGrid, { childList: true, subtree: true });
+    }
+  </script>
+</body>
+</html>
